@@ -1,0 +1,68 @@
+version: "3.9"
+services:
+  api_rest:
+    build: ./api_rest
+    restart: always
+    ports:
+      - "5000:5000"
+    depends_on:
+      - object_storage
+      - database
+  object_storage:
+    image: bitnami/minio
+    restart: always
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    env_file:
+      - object_storage/config.env
+  database:
+    build: ./database
+    restart: always
+    ports:
+      - "5432:5432"
+    env_file:
+      - database/config.env
+  redis:
+    image: bitnami/redis
+    restart: always
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+  airflow_server:
+    image: bitnami/airflow
+    restart: always
+    ports:
+      - "8080:8080"
+    env_file:
+      - airflow/config.env
+    depends_on:
+      - api_rest
+      - database
+      - redis
+    volumes:
+      - ./airflow/dags/:/opt/bitnami/airflow/dags/
+      - ./airflow/requirements.txt:/bitnami/python/requirements.txt
+  airflow_scheduler:
+    image: bitnami/airflow-scheduler
+    restart: always
+    env_file:
+      - airflow/config.env
+    depends_on:
+      - api_rest
+      - database
+      - redis
+    volumes:
+      - ./airflow/dags/:/opt/bitnami/airflow/dags/
+      - ./airflow/requirements.txt:/bitnami/python/requirements.txt
+  airflow_worker:
+    image: bitnami/airflow-worker
+    restart: always
+    env_file:
+      - airflow/config.env
+    depends_on:
+      - api_rest
+      - database
+      - redis
+    volumes:
+      - ./airflow/dags/:/opt/bitnami/airflow/dags/
+      - ./airflow/requirements.txt:/bitnami/python/requirements.txt
