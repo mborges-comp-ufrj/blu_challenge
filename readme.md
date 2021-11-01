@@ -47,7 +47,7 @@ Para a construção da solução requisitada, foi necessária a criação de 7 c
 **Configurações:**
 * airflow/config.env: configurações de ambiente
 ## Execução da Solução
-Para executar a solução, é necessária a instalação e execução das aplicações docker e docker-compose. É recomendável que a máquina utilizada tenha pelo menos 6GB de RAM para disponibilizar aos contâiners. Em seguida, execute no terminal: `docker-compose build` e, em seguida, `docker-compose up -d`
+Para executar a solução, é necessária a instalação e execução das aplicações docker e docker-compose. É recomendável que a máquina utilizada tenha pelo menos 6GB de RAM para disponibilizar aos contâiners. Em seguida, acesse a pasta onde se encontrar o *docker_compose.yml* e execute no terminal: `docker-compose build` e, em seguida, `docker-compose up -d`
 
 Aguarde entre 5-10 minutos para a correta inicialização de todos os serviços. 
 
