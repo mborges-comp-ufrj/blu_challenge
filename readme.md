@@ -59,7 +59,7 @@ Logo que os serviços inicializarem, o Airflow começará a processar a DAG disp
 Em seguida, a API processará os dados, e os salvará no bucket *datalake* do MinIO. A aplicação pode ser acessada em http://localhost:9001/.
 * Acessos:
     * Usuário: blu_champion
-    * Senha: blu_challende_accepted
+    * Senha: blu_challenge_accepted
 
 Para concluir, os dados serão inseridos no Banco de Dados PostgreSQL, mediante o modelo definido nas configurações da API (e tabelas criadas utilizando o script init.sql, conforme documentado mais acima). Acesse-os utilizando algum Workbench de escolha (recomendo o DBeaver).
 * Acessos:
